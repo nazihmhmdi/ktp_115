@@ -19,8 +19,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 </tr>
                 <tr th:each="godummy:${goDummy}">
                     <td th:text="${godummy.id}"></td>
-                    <td th:text="${#calendars.format(godummy.tanggal, 'dd-MM-yyyy')}"></td>
-                    <td th:text="${godummy.tanggal}"></td>
+                    <td th:text="${#dates.format(godummy.tanggal,'dd-mm-yyyy')}"></td>
+                    <td><img th:src="@{${'/image?id='+ godummy.id}}" alt="image" width="100"></td>
                 </tr>
             </table>
         </div>
