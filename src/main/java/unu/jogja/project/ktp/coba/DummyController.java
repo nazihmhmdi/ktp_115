@@ -14,6 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,7 +46,7 @@ public class DummyController {
             result=e.getMessage();
         }
         
-        model.addAttribute("godummy", data);
+        model.addAttribute("goDummy", data);
         model.addAttribute("record", record);
          
         return "dummy";    
@@ -52,7 +54,6 @@ public class DummyController {
     
     @RequestMapping("/create")
     public String createDummy() {
-
         return "dummy/create";
     }
 
@@ -73,6 +74,8 @@ public class DummyController {
         dumdata.setId(iid);
         dumdata.setTanggal(date);
         dumdata.setGambar(image);
+        
+        dummyController.create(dumdata);
 
         return "dummy/create";
     }
@@ -82,5 +85,36 @@ public class DummyController {
 	Dummy dumdata = dummyController.findDummy(id);
 	byte[] image = dumdata.getGambar();
 	return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(image);
+    }
+    
+    @GetMapping("/delete/{id}")
+    @ResponseBody
+    public String deleteDummy(@PathVariable("id") int id) throws Exception {
+        dummyController.destroy(id);
+        return "deleted";
+    }
+
+    @RequestMapping("/edit/{id}")
+    public String updateDummy(@PathVariable("id") int id, Model m) throws Exception {
+        Dummy d = dummyController.findDummy(id);
+        m.addAttribute("data", d);
+        return "dummy/update";
+    }
+
+    @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseBody
+    public String updateDummyData(@RequestParam("gambar") MultipartFile f, HttpServletRequest r)
+            throws ParseException, Exception {
+        Dummy d = new Dummy();
+
+        int id = Integer.parseInt(r.getParameter("id"));
+        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(r.getParameter("tanggal"));
+        byte[] img = f.getBytes();
+        d.setId(id);
+        d.setTanggal(date);
+        d.setGambar(img);
+
+        dummyController.edit(d);
+        return "updated";
     }
 }

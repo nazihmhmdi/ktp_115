@@ -44,7 +44,27 @@
                     </div>
                 </div>
             </nav>    
-        <div align="center">KTP Indonesia</div>
+        <div align="center">KTP Indonesia index</div>
+        <div>Database KTP Indonesian</div>
+        <a href="/create">Data Baru</a>
+        <div class="table-responsive">
+            <table class ="table align-middle" action="/data">
+                <tr>
+                    <th>NIK</th>
+                    <th>Nama</th>
+                    <th>Tanggal Lahir</th>
+                    <th>Alamat</th>
+                    <th>Action</th>
+                </tr>
+                <tr th:each="godata:${goData}">
+                    <td th:text="${godata.noktp}"></td>
+                    <td th:text="${godata.nama}"></td>
+                    <td th:text="${#calendars.format(godata.tgllahir, 'dd-MM-yyyy')}"></td>
+                    <td th:text="${godata.alamat}"></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
         
         <!-- JavaScript Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 

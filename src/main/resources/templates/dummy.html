@@ -16,11 +16,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <th>NIK</th>
                     <th>Tanggal Lahir</th>
                     <th>Foto</th>
+                    <th>Aksi</th>
                 </tr>
                 <tr th:each="godummy:${goDummy}">
                     <td th:text="${godummy.id}"></td>
                     <td th:text="${#dates.format(godummy.tanggal,'dd-mm-yyyy')}"></td>
                     <td><img th:src="@{${'/image?id='+ godummy.id}}" alt="image" width="100"></td>
+                    <td>
+                      <a th:href="@{/edit/{id}(id=${godummy.id})}" class="btn btn-pssrimary btn-sm">Edit</a>
+                      <a th:href="@{/delete/{id}(id=${godummy.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Yakin Mau Dihapus?')">Delete</a>
+                    </td>
                 </tr>
             </table>
         </div>
