@@ -20,15 +20,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <table>
                 <tr>
                     <td>NIK</td>
-                    <td><input type="text"  name="id"></td>
+                    <td><input type="text" th:value="${data.id}" disabled></td>
+                    <td><input type="hidden" name="id" th:value="${data.id}"></td>
                 </tr>
                 <tr>
                     <td>Tanggal Lahir</td>
-                    <td><input type="date" name="tanggal"></td>
+                    <td><input type="date" name="tanggal" th:value="${#dates.format(data.tanggal,'yyyy-MM-dd')}"></td>
                 </tr>
                 <tr>
                     <td>Foto</td>
-                    <td><input type="file" name="gambar"></td>
+                    <td><img th:src="@{${'/image?id='+ data.id}}" alt="image" height="100"></td>
+                </tr>
+                <tr>
+                    <td>Foto Baru</td>
+                    <td><input type="file" name="gambar" th:value="@{data.gambar}"></td>
                 </tr>
                 <tr>
                     <td><button type="submit" >Submit</button></td></tr>
