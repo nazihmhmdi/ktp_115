@@ -24,7 +24,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <td><img th:src="@{${'/image?id='+ godummy.id}}" alt="image" width="100"></td>
                     <td>
                       <a th:href="@{/edit/{id}(id=${godummy.id})}" class="btn btn-pssrimary btn-sm">Edit</a>
-                      <a th:href="@{/delete/{id}(id=${godummy.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Yakin Mau Dihapus?')">Delete</a>
+                      <a th:href="@{/delete/{id}(id=${godummy.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Hapus Data?')">Delete</a>
                     </td>
                 </tr>
             </table>
