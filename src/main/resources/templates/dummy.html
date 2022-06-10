@@ -13,7 +13,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
               crossorigin="anonymous">
     </head>
     <body>
-
         <div th:insert="/menu :: main_menu"></div>
         <a href="/create" class="btn btn-primary btn-sm">Data Baru</a>
         <div class="table-responsive">
@@ -26,7 +25,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 </tr>
                 <tr th:each="godummy:${goDummy}">
                     <td th:text="${godummy.id}"></td>
-                    <td th:text="${#dates.format(godummy.tanggal,'dd-mm-yyyy')}"></td>
+                    <td th:text="${#dates.format(godummy.tanggal,'dd-MM-yyyy')}"></td>
                     <td><img th:src="@{${'/image?id='+ godummy.id}}" alt="image" width="100"></td>
                     <td>
                       <a th:href="@{/edit/{id}(id=${godummy.id})}" class="btn btn-primary btn-sm">Edit</a>

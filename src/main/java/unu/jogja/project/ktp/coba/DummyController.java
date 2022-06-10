@@ -89,7 +89,7 @@ public class DummyController {
     }
     
     @GetMapping("/delete/{id}")
-//    @ResponseBody
+//  @ResponseBody
     public String deleteDummy(@PathVariable("id") int id) throws Exception {
         dummyController.destroy(id);
         return "redirect:/dummy";
@@ -98,7 +98,7 @@ public class DummyController {
     @RequestMapping("/edit/{id}")
     public String updateDummy(@PathVariable("id") int id, Model m) throws Exception {
         Dummy dum = dummyController.findDummy(id);
-        m.addAttribute("data", dum);
+        m.addAttribute("goDummy", dum);
         return "dummy/update";
     }
 
